@@ -3,68 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FuckCSDN</title>
+    <title>FuckCSDN - 精致界面</title>
     <style>
+        :root {
+            --el-color-primary: #409EFF;
+            --el-color-success: #67C23A;
+            --el-color-warning: #E6A23C;
+            --el-color-danger: #F56C6C;
+            --el-color-info: #909399;
+            --el-color-text-primary: #303133;
+            --el-color-text-regular: #606266;
+            --el-color-text-placeholder: #A8ABB2;
+            --el-color-border: #DCDFE6;
+            --el-bg-color: #FFFFFF;
+            --el-bg-color-page: #F5F7FA;
+            --el-fill-color: #F0F2F5;
+            --el-fill-color-light: #F5F7FA;
+            --el-fill-color-blank: #FAFAFA;
+            --el-fill-color-dark: #E4E7ED;
+            --el-box-shadow-light: 0px 0px 12px 0px rgba(0, 0, 0, 0.12);
+            --el-box-shadow-lighter: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
+            --el-box-shadow-medium: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+            --el-box-shadow-dark: 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+            --el-border-radius-base: 4px;
+            --el-border-radius-small: 2px;
+            --el-font-size-extra-large: 20px;
+            --el-font-size-large: 16px;
+            --el-font-size-medium: 14px;
+            --el-font-size-small: 13px;
+            --el-font-size-extra-small: 12px;
+            --el-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
         body {
-            font-family: monospace;
-            line-height: 1.5;
-            color: #000;
-            background: #fff;
+            font-family: var(--el-font-family);
+            line-height: 1.6;
+            color: var(--el-color-text-primary);
+            background: var(--el-bg-color-page);
             margin: 0;
-            padding: 2em;
-            max-width: 60em;
+            padding: 2rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
         h1, h2, h3 {
-            font-weight: normal;
+            font-weight: 400;
+            color: var(--el-color-text-primary);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            margin-top: 0;
+            letter-spacing: -0.02em;
+        }
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--el-color-primary);
+            padding-left: 1rem;
         }
         a {
-            color: #000;
+            color: var(--el-color-primary);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         a:hover {
-            text-decoration: underline;
+            color: #66B1FF;
         }
-        pre {
-            white-space: pre-wrap;
-            margin: 1em 0;
+        /* 按钮组模拟Element Plus el-button-group */
+        .button-group {
+            display: inline-flex;
+            vertical-align: middle;
+            border-radius: var(--el-border-radius-base);
+            overflow: hidden;
+            box-shadow: var(--el-box-shadow-light);
+            transition: box-shadow 0.3s ease;
+        }
+        .button-group:hover {
+            box-shadow: var(--el-box-shadow-medium);
+        }
+        .button-group a {
+            background: var(--el-color-primary);
+            color: #FFF;
+            padding: 12px 20px;
+            font-weight: 500;
+            font-size: var(--el-font-size-medium);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+            border: none;
+            text-decoration: none;
+            position: relative;
+        }
+        .button-group a:first-child {
+            border-top-left-radius: var(--el-border-radius-base);
+            border-bottom-left-radius: var(--el-border-radius-base);
+        }
+        .button-group a:last-child {
+            border-top-right-radius: var(--el-border-radius-base);
+            border-bottom-right-radius: var(--el-border-radius-base);
+        }
+        .button-group a:not(:first-child) {
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .button-group a:hover {
+            background: #66B1FF;
+            transform: translateY(-1px);
         }
         ul, ol {
-            margin-left: 2em;
+            margin-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--el-color-text-regular);
+            transition: color 0.3s ease;
         }
         p {
-            margin-bottom: 1em;
+            margin-bottom: 1rem;
+            color: var(--el-color-text-regular);
+            text-align: justify;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature {
+            background: var(--el-bg-color);
+            padding: 1.5rem;
+            border-radius: var(--el-border-radius-base);
+            border: 1px solid var(--el-color-border);
+            box-shadow: var(--el-box-shadow-lighter);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--el-color-primary), #66B1FF);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .feature:hover {
+            box-shadow: var(--el-box-shadow-medium);
+            transform: translateY(-4px);
+        }
+        .feature:hover::before {
+            opacity: 1;
+        }
+        .feature strong {
+            color: var(--el-color-primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: var(--el-font-size-large);
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            justify-items: center;
+        }
+        .gallery-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: var(--el-border-radius-base);
+            box-shadow: var(--el-box-shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .gallery-image:hover {
+            transform: scale(1.03) rotate(0.5deg);
+            box-shadow: var(--el-box-shadow-dark);
+        }
+        .more-images {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .more-btn {
+            background: var(--el-fill-color);
+            color: var(--el-color-primary);
+            padding: 10px 20px;
+            border: 1px solid var(--el-color-border);
+            border-radius: var(--el-border-radius-base);
+            font-size: var(--el-font-size-medium);
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .more-btn:hover {
+            background: var(--el-color-primary);
+            color: #FFF;
+            box-shadow: var(--el-box-shadow-light);
+            transform: translateY(-1px);
+        }
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--el-color-border);
+            color: var(--el-color-text-placeholder);
+            font-size: var(--el-font-size-small);
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--el-color-border);
+            margin: 3rem 0;
+        }
+        /* PC优先响应式：从大屏到小屏 */
+        @media (min-width: 1200px) {
+            body {
+                padding: 3rem;
+            }
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            h1 {
+                font-size: 3rem;
+            }
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 1024px) {
+            body {
+                max-width: 900px;
+                padding: 1.5rem;
+            }
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+                max-width: none;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .button-group a {
+                border-radius: 0;
+            }
+            .button-group a:first-child {
+                border-top-left-radius: var(--el-border-radius-base);
+                border-top-right-radius: var(--el-border-radius-base);
+            }
+            .button-group a:last-child {
+                border-bottom-left-radius: var(--el-border-radius-base);
+                border-bottom-right-radius: var(--el-border-radius-base);
+                border-left: none;
+            }
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    
     <h1>FuckCSDN</h1>
     <p>一个用户脚本，用于全面屏蔽CSDN及其关联网站，包括搜索结果中的链接、直接访问和页面跳转。</p>
     <p>CSDN的商业化实践已深刻影响了中国技术社区的分享生态。</p>
+
+    <!-- 按钮组：合并为一个按钮组 -->
+    <div style="text-align: center; margin: 2rem 0;">
+        <div class="button-group">
+            <a href="https://zeart.ink/fuckcsdn.user.js">安装脚本</a>
+            <a href="https://www.tampermonkey.net/">Tampermonkey下载</a>
+        </div>
+    </div>
 
     <h2>背景与动机</h2>
     <p>CSDN起初作为技术爱好者和专业人士的交流平台，提供免费的代码分享、问题讨论和技术文章，支撑了早期中国互联网开发社区的成长。然而，随着其商业模式的演变，平台引入了付费阅读机制、资源下载限制以及密集的广告投放。这些变化不仅提高了用户获取信息的门槛，还逐步改变了内容生产者的行为模式。原本基于互惠的知识共享转向了以盈利为导向的模式：作者需为优质内容设置付费墙，平台算法优先推送商业化资源，导致免费、高质量的内容日益稀缺。</p>
     <p>这种转变对整个技术博客生态产生了连锁效应。其他平台效仿CSDN的做法，强化了付费逻辑，削弱了开源协作的核心价值。开发者在寻找解决方案时，常被迫面对低质复制内容或高额费用，社区的包容性和创新活力随之衰退。FuckCSDN脚本旨在通过技术手段恢复用户的自主选择权，鼓励回归非商业化的知识传播渠道，如开源仓库和独立博客。</p>
 
-    <h2>核心功能</h2>
-    <ul>
-        <li><strong>域名拦截：</strong>针对CSDN主站及子域（如blog.csdn.net、download.csdn.net）进行全局阻塞，支持自定义白名单以允许特定访问。</li>
-        <li><strong>搜索结果过滤：</strong>在主流搜索引擎（如Google、Baidu、Bing）中自动隐藏CSDN相关链接，确保搜索体验的纯净度。</li>
-        <li><strong>文本内容审查：</strong>扫描页面文本，将CSDN域名替换为空格，防止间接曝光。</li>
-        <li><strong>配置管理：</strong>提供调试日志、自定义屏蔽页面消息、设置导出/导入以及一键重置功能，支持精细化调整。</li>
-    </ul>
+    <h2>控制面板展示</h2>
+    <div class="image-gallery">
+        <img src="https://cdn.mengze.vip/gh/YShenZe/Blog-Static-Resource@main/images/141effb4f6c40f07.jpg" alt="控制面板截图1" class="gallery-image">
+        <img src="https://cdn.mengze.vip/gh/YShenZe/Blog-Static-Resource@main/images/e5d28387f419faea.jpg" alt="控制面板截图2" class="gallery-image">
+        <img src="https://cdn.mengze.vip/gh/YShenZe/Blog-Static-Resource@main/images/b7a4fdf00e969988.jpg" alt="控制面板截图3" class="gallery-image">
+        <img src="https://cdn.mengze.vip/gh/YShenZe/Blog-Static-Resource@main/images/fca1c2956e461dde.jpg" alt="控制面板截图4" class="gallery-image">
+    </div>
+    <div class="more-images">
+        <a href="https://github.com/JanePHPDev/FuckCSDN/" class="more-btn">仓库地址</a>
+        <a href="https://pd.qq.com/s/d89l9yl8f?b=9" class="more-btn">加入交流频道</a>
+        <a href="https://qm.qq.com/q/zQjuUYuWJy" class="more-btn">作者QQ</a>
+    </div>
 
-    <h2>安装步骤</h2>
-    <p>该脚本依赖浏览器用户脚本管理器，如Tampermonkey或Violentmonkey。</p>
-    <ol>
-        <li>从浏览器扩展商店安装Tampermonkey。</li>
-        <li>访问脚本链接并确认安装。</li>
-        <li>在管理器中启用脚本。</li>
-        <li>刷新当前页面或重启浏览器以激活效果。</li>
-    </ol>
-    <p><a href="https://zeart.ink/fuckcsdn.user.js">安装脚本</a> | <a href="https://www.tampermonkey.net/">Tampermonkey下载</a></p>
+    <footer>
+        <p><small>&copy; 2025 JanePHPDev | MIT License | <a href="https://github.com/JanePHPDev/FuckCSDN">GitHub仓库</a></small></p>
+    </footer>
 
-    <hr>
-    <p><small>&copy; 2025 JanePHPDev | MIT License | <a href="https://github.com/JanePHPDev/FuckCSDN">GitHub仓库</a></small></p>
 </body>
 </html>
